@@ -27,56 +27,57 @@
 
             <button type="button" class="btn btn-primary" id="grow">+</button>
             <button type="button" class="btn btn-danger" id="shrink">-</button>
-            <button type="button" class="btn btn-primary" id="start">start</button>
-            <button type="button" class="btn btn-danger" id="stop">stop</button>
+
+            <button type="button" class="btn btn-primary" id="prev">prev</button>
+            <button type="button" class="btn btn-danger" id="next">next</button>
 
         </div>
     </div>
 </div>
 
+<script src="courses_data.js"></script>
 <script>
-    var fontSize = 55;
-    var progress = 20;
-    var interval;
+    var fontSize = 2;
+    var index = 0;
+    var data = courses_data[index];
 
-    var course = function() {
+    var course = function(data) {
         return React.createElement('div', {id: 'kurs', className: 'media course'},
-            React.createElement('img', {className: 'mr-3', src: 'https://placekitten.com/64/64', alt: 'Miniatura'}),
+            React.createElement('img', {className: 'mr-3', src: data.image, alt: ''}),
             React.createElement('div', {className: 'media-body'},
-                React.createElement('h5', {style: {fontSize: fontSize + 'px'}}, 'Kurs React'),
-                React.createElement('p', {}, 'React od podstaw'),
-                'Ładowanie...',
-                React.createElement('div', {className: 'progress'},
-                    React.createElement('div', {className: 'progress-bar progress-bar-striped progress-bar-animated', style: {width: progress + '%'}}, progress + '%')
-                )
+                React.createElement('h5', {style: {fontSize: fontSize + 'em'}}, data.title),
+                React.createElement('p', {style: {fontSize: fontSize/2 + 'em'}}, data.description)
             )
         );
     };
 
     document.getElementById('grow').addEventListener('click', function() {
-        fontSize++;
+        fontSize = fontSize >= 2.2 ? fontSize : fontSize + 0.2;
         render();
     });
 
     document.getElementById('shrink').addEventListener('click', function() {
-        fontSize--;
+        fontSize = fontSize <= 1.4 ? fontSize : fontSize - 0.2;
         render();
     });
 
-    document.getElementById('start').addEventListener('click', function() {
-        interval = setInterval(function() {
-            progress++;
-            render();
-        }, 500);
+    document.getElementById('prev').addEventListener('click', function() {
+        if(courses_data[index - 1]) {
+            index--;
+        }
+        render();
     });
 
-    document.getElementById('stop').addEventListener('click', function() {
-        clearInterval(interval);
+    document.getElementById('next').addEventListener('click', function() {
+        if(courses_data[index + 1]) {
+            index++;
+        }
         render();
     });
 
     function render() {
-        ReactDOM.render(course(), document.getElementById('root'));
+        data = courses_data[index];
+        ReactDOM.render(course(data), document.getElementById('root'));
     }
     render();
 </script>

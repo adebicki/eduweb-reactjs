@@ -33,6 +33,11 @@ Deklarujemy element raz (React.createElement(..., {}, children...)) uzależniaj�
 wartości tych zmiennych. Ważne, żeby deklaracja była w funkcji, ( function course() {return React.createElement(...)} ),
 żeby można było odświeżać w ogóle po zmianie zmiennych ( ReactDOM.render(course(), document.getElementById('root')); )
 
+###### Dynamiczna treść
+Dane możemy mieć skądkolwiek, potem tylko w szablonie dajemy np.
+React.createElement('img', {src: data.image}),
+
+
 next:
-https://eduweb.pl/player/reactjs-w-praktyce/dynamiczna-tresc
+https://eduweb.pl/player/reactjs-w-praktyce/dynamiczne-ukrywanie-elementow
 
