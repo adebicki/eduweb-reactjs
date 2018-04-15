@@ -46,7 +46,9 @@
             React.createElement('img', {className: 'mr-3', src: data.image, alt: ''}),
             React.createElement('div', {className: 'media-body'},
                 React.createElement('h5', {style: {fontSize: fontSize + 'em'}}, data.title),
-                React.createElement('p', {style: {fontSize: fontSize/2 + 'em'}}, data.description)
+                React.createElement('p', {style: {fontSize: fontSize/2 + 'em'}}, data.description),
+                data.is_new ? React.createElement('p', {style: {fontSize: fontSize/2 + 'em', fontWeight: 'bolder'}}, 'Nowość!') : null,
+                data.is_promo ? React.createElement('p', {style: {fontSize: fontSize/2 + 'em', fontWeight: 'bolder'}}, 'Promocja!') : null
             )
         );
     };

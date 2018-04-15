@@ -37,7 +37,13 @@ wartości tych zmiennych. Ważne, żeby deklaracja była w funkcji, ( function c
 Dane możemy mieć skądkolwiek, potem tylko w szablonie dajemy np.
 React.createElement('img', {src: data.image}),
 
+###### Ukrywanie elementów (warunkowe) 
+
+np.
+data.is_new ? React.createElement('p', {style: {fontSize: fontSize/2 + 'em', fontWeight: 'bolder'}}, 'Nowość!') : null
+
+###### Szablony JSX
 
 next:
-https://eduweb.pl/player/reactjs-w-praktyce/dynamiczne-ukrywanie-elementow
+https://eduweb.pl/player/reactjs-w-praktyce/konfiguracja-i-renderowanie-jsx
 
