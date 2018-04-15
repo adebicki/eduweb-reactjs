@@ -8,7 +8,12 @@
 
     <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-
+    <style>
+        .course {
+            border: 1px solid #cecece;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -16,21 +21,64 @@
         <div class="col-12">
             <h1>Eduweb reactjs</h1>
 
-            <div id="kurs">
+            <div id="root">
 
             </div>
+
+            <button type="button" class="btn btn-primary" id="grow">+</button>
+            <button type="button" class="btn btn-danger" id="shrink">-</button>
+            <button type="button" class="btn btn-primary" id="start">start</button>
+            <button type="button" class="btn btn-danger" id="stop">stop</button>
 
         </div>
     </div>
 </div>
 
 <script>
-    var div  = React.createElement('div', {},
-        React.createElement('h3', {}, 'Header h3'),
-        React.createElement('p', {}, 'paragraf')
-    );
+    var fontSize = 55;
+    var progress = 20;
+    var interval;
 
-    ReactDOM.render(div, document.getElementById('kurs'));
+    var course = function() {
+        return React.createElement('div', {id: 'kurs', className: 'media course'},
+            React.createElement('img', {className: 'mr-3', src: 'https://placekitten.com/64/64', alt: 'Miniatura'}),
+            React.createElement('div', {className: 'media-body'},
+                React.createElement('h5', {style: {fontSize: fontSize + 'px'}}, 'Kurs React'),
+                React.createElement('p', {}, 'React od podstaw'),
+                'Ładowanie...',
+                React.createElement('div', {className: 'progress'},
+                    React.createElement('div', {className: 'progress-bar progress-bar-striped progress-bar-animated', style: {width: progress + '%'}}, progress + '%')
+                )
+            )
+        );
+    };
+
+    document.getElementById('grow').addEventListener('click', function() {
+        fontSize++;
+        render();
+    });
+
+    document.getElementById('shrink').addEventListener('click', function() {
+        fontSize--;
+        render();
+    });
+
+    document.getElementById('start').addEventListener('click', function() {
+        interval = setInterval(function() {
+            progress++;
+            render();
+        }, 500);
+    });
+
+    document.getElementById('stop').addEventListener('click', function() {
+        clearInterval(interval);
+        render();
+    });
+
+    function render() {
+        ReactDOM.render(course(), document.getElementById('root'));
+    }
+    render();
 </script>
 
 </body>
